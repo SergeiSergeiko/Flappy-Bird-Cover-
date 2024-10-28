@@ -1,0 +1,1 @@
+public class BulletPoolObjects : PoolObjects<Bullet> { }

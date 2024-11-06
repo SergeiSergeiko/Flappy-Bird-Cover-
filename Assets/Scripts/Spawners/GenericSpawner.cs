@@ -1,9 +1,9 @@
 using UnityEngine;
 
-public class GSpawner<T> : MonoBehaviour where T : MonoBehaviour
+public class GenericSpawner<T> : MonoBehaviour where T : MonoBehaviour
 {
     [SerializeField] protected T Prefab;
-    [SerializeField] protected PoolObjects<T> Pool;
+    [SerializeField] protected GenericPoolObjects<T> Pool;
 
     protected virtual void Spawn(Vector3 position)
     {

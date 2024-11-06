@@ -7,6 +7,8 @@ public class Enemy : MonoBehaviour
 
     public event Action<Enemy> Died;
 
+    [field: SerializeField] public int Reward;
+
     private void OnDisable()
     {
         _health.Dies -= Die;

@@ -3,12 +3,12 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    public event Action<Bullet> Collided;
+    public event Action<Bullet> Removing;
 
     [field: SerializeField] public int Damage { get; private set; }
 
-    public void OnCollidedHandler()
+    public void Remove()
     {
-        Collided?.Invoke(this);
+        Removing?.Invoke(this);
     }
 }

@@ -8,8 +8,8 @@ public class RocketBulletCollisionDetecter : BulletCollisionDetecter
 
         if (collision.TryGetComponent(out Enemy enemy))
         {
-            enemy.TakeDamage(Bullet.Damage);
-            TriggerCollidedEvent();
+            enemy.TakeDamage(_bullet.Damage);
+            _bullet.Remove();
         }
     }
 }

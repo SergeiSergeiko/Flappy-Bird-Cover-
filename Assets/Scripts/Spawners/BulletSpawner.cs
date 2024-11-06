@@ -1,7 +1,6 @@
-using System;
 using UnityEngine;
 
-public class BulletSpawner : GSpawner<Bullet>
+public class BulletSpawner : GenericSpawner<Bullet>
 {
     public void OnOwnerAttackedHandler(Vector2 position)
     {
@@ -10,12 +9,12 @@ public class BulletSpawner : GSpawner<Bullet>
 
     protected override void Subscribe(Bullet bullet)
     {
-        bullet.Collided += OnBulletCollidedHandler;
+        bullet.Removing += OnBulletCollidedHandler;
     }
 
     private void OnBulletCollidedHandler(Bullet bullet)
     {
-        bullet.Collided -= OnBulletCollidedHandler;
+        bullet.Removing -= OnBulletCollidedHandler;
 
         Pool.Release(bullet);
     }

@@ -7,7 +7,7 @@ public class RocketCollistionDetecter : MonoBehaviour
 
     private int _damage = 1;
 
-    private void Awake()
+    private void OnValidate()
     {
         GetComponent<BoxCollider2D>().isTrigger = true;
     }

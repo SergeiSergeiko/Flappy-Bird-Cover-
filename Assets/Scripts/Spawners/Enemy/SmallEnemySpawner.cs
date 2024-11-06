@@ -1,19 +1,25 @@
 using System.Collections;
 using UnityEngine;
 
-public class SmallEnemySpawner : GSpawner<SmallEnemy>
+public class SmallEnemySpawner : GenericSpawner<SmallEnemy>
 {
     [SerializeField] private Transform[] _spawnPoints;
     [SerializeField] private float _delay;
 
     [SerializeField] private BulletSpawner _bulletSpawner;
 
+    private Coroutine _spawning;
     private bool _isSpawn = true;
     private int _counter = 0;
 
-    private void Start()
+    public void StartSpawning()
     {
-        StartCoroutine(Spawning());
+        _spawning ??= StartCoroutine(Spawning());
+    }
+
+    public void StopSpawning()
+    {
+        StopCoroutine(Spawning());
     }
 
     protected override void Subscribe(SmallEnemy enemy)

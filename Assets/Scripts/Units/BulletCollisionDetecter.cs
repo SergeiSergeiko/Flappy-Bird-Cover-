@@ -1,31 +1,18 @@
-using System;
 using UnityEngine;
 
 [RequireComponent (typeof(BoxCollider2D))]
 public class BulletCollisionDetecter : MonoBehaviour
 {
-    public event Action Collided;
+    [SerializeField] protected Bullet _bullet;
 
-    [field: SerializeField] public Bullet Bullet { get; private set; }
-
-    private void OnEnable()
+    private void OnValidate()
     {
-        Collided += Bullet.OnCollidedHandler;
-    }
-
-    private void OnDisable()
-    {
-        Collided -= Bullet.OnCollidedHandler;
+        GetComponent<BoxCollider2D>().isTrigger = true;
     }
 
     protected virtual void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.TryGetComponent(out Destroyer _))
-            TriggerCollidedEvent();
-    }
-
-    protected void TriggerCollidedEvent()
-    {
-        Collided?.Invoke();
+            _bullet.Remove();
     }
 }

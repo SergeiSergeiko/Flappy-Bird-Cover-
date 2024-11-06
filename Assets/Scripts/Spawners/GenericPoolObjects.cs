@@ -1,11 +1,14 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Pool;
 
-public class PoolObjects<T> : MonoBehaviour where T : MonoBehaviour
+public class GenericPoolObjects<T> : Resetter where T : MonoBehaviour
 {
     [SerializeField] private T _prefab;
     [SerializeField] private int _capacity;
     [SerializeField] private int _maxCapacity;
+
+    protected List<T> Objects = new();
 
     private ObjectPool<T> _pool;
 
@@ -32,6 +35,7 @@ public class PoolObjects<T> : MonoBehaviour where T : MonoBehaviour
     private T Create()
     {
         T obj = Instantiate(_prefab);
+        Objects.Add(obj);
 
         return obj;
     }

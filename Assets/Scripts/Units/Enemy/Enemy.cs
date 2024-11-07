@@ -24,6 +24,11 @@ public class Enemy : MonoBehaviour
         _health.TakeDamage(damage);
     }
 
+    public void Remove()
+    {
+        Die();
+    }
+
     private void Die()
     {
         Died?.Invoke(this);

@@ -6,6 +6,6 @@ public class SmallEnemyPoolObjects : GenericPoolObjects<SmallEnemy>
     {
         Objects?.Where(obj => obj.gameObject.activeSelf == true)
             .ToList()
-            .ForEach(obj => obj.TakeDamage(10));
+            .ForEach(obj => obj.Remove());
     }
 }

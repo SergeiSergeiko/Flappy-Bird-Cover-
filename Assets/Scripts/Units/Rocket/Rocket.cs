@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class Rocket : MonoBehaviour
@@ -7,21 +8,24 @@ public class Rocket : MonoBehaviour
     [SerializeField] private UserInput _input;
     [SerializeField] private RocketMover _mover;
 
+    public event Action Died;
+
     public void Reset()
     {
         _mover.Reset();
         _scoreCounter.Reset();
+        _health.Reset();
         _input.enabled = true;
     }
 
     private void OnEnable()
     {
-        _health.Dies += Die;
+        _health.Dying += Die;
     }
 
     private void OnDisable()
     {
-        _health.Dies -= Die;
+        _health.Dying -= Die;
     }
 
     public void TakeDamage(int damage)
@@ -36,6 +40,6 @@ public class Rocket : MonoBehaviour
 
     private void Die()
     {
-        Destroy(gameObject);
+        Died?.Invoke();
     }
 }

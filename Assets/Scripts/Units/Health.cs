@@ -5,7 +5,7 @@ public class Health : MonoBehaviour
 {
     private readonly int _minValue = 0;
 
-    public event Action Dies;
+    public event Action Dying;
     public event Action<int> Changed;
 
     [field: SerializeField] public int MaxValue;
@@ -15,6 +15,11 @@ public class Health : MonoBehaviour
     {
         if (MaxValue <= _minValue)
             MaxValue = _minValue + 1;
+    }
+
+    public void Reset()
+    {
+        Set(MaxValue);
     }
 
     private void Start()
@@ -34,7 +39,7 @@ public class Health : MonoBehaviour
         Value = Mathf.Clamp(value, _minValue, MaxValue);
 
         if (Value <= 0)
-            Dies?.Invoke();
+            Dying?.Invoke();
 
         Changed?.Invoke(Value);
     }

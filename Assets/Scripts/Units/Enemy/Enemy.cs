@@ -11,12 +11,12 @@ public class Enemy : MonoBehaviour
 
     private void OnDisable()
     {
-        _health.Dies -= Die;
+        _health.Dying -= Die;
     }
 
     private void Start()
     {
-        _health.Dies += Die;
+        _health.Dying += Die;
     }
 
     public void TakeDamage(int damage)

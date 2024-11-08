@@ -12,14 +12,15 @@ public class SmallEnemySpawner : GenericSpawner<SmallEnemy>
     private bool _isSpawn = true;
     private int _counter = 0;
 
-    public void StartSpawning()
+    private void Start()
     {
         _spawning ??= StartCoroutine(Spawning());
     }
 
     public void StopSpawning()
     {
-        StopCoroutine(Spawning());
+        if (_spawning != null)
+            StopCoroutine(_spawning);
     }
 
     protected override void Subscribe(SmallEnemy enemy)

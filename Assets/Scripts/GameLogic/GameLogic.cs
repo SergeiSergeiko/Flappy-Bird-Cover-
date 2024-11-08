@@ -7,10 +7,10 @@ public class GameLogic : MonoBehaviour
     [SerializeField] private GameOverWindow _gameOverWindow;
     [SerializeField] private StartGameWindow _startGameWindow;
     [SerializeField] private PoolObjectsResetter _poolObjectsResetter;
-    [SerializeField] private SmallEnemySpawner _enemySpawner;
 
     private void OnEnable()
     {
+        _rocket.Died += OnGameOver;
         _gameOverZone.GameOver += OnGameOver;
         _gameOverWindow.ButtonClicked += OnRestartButtonClicked;
         _startGameWindow.ButtonClicked += OnPlayButtonClicked;
@@ -18,6 +18,7 @@ public class GameLogic : MonoBehaviour
 
     private void OnDisable()
     {
+        _rocket.Died -= OnGameOver;
         _gameOverZone.GameOver -= OnGameOver;
         _gameOverWindow.ButtonClicked -= OnRestartButtonClicked;
         _startGameWindow.ButtonClicked -= OnPlayButtonClicked;
@@ -28,7 +29,6 @@ public class GameLogic : MonoBehaviour
         Time.timeScale = 0;
         _startGameWindow.Open();
         _rocket.DisableInput();
-        _enemySpawner.StartSpawning();
     }
 
     private void OnGameOver()
